@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="top-nav">
+    <a href="{{ url_for('convidados.dashboard_page') }}" class="btn btn-secondary">Dashboard</a>
+    <a href="{{ url_for('convidados.listar_page')}}" class="btn btn-primary active">Convidados</a>
+    <a href="{{ url_for('auth.me')}}" class="btn btn-secondary">Perfil</a>
+    <a href="{{ url_for('convidados.recepcao_page')}}" class="btn btn-secondary">Recepção</a>
+</div>
+
+<div>
+    <a href="{{ url_for('convidados.cadastrar_page') }}" class="btn btn-success">Cadastrar Convidado</a>
+</div>
+
+<div>
+    {% for convidado in convidados%}
+        <div>
+            {{ convidado.nome }}
+            {{ convidado.cpf }}
+            {{ convidado.mesa }}
+        </div>
+        <div>
+                <div>
+                    <form action="{{ url_for('convidados.checkin_page', id=convidado.id) }}" method="post">
+                        {% if convidado.checkin == False and session.get("perfil") in ["admin", "repecao"] %}
+                            <button type="submit">Checkin</button>
+                        {% endif %}
+                    </form>
+                </div>
+                <div>
+                    <form action="{{ url_for('convidados.editar_get_page', id=convidado.id) }}" method="post">
+                        {% if session.get("perfil") == "admin" %}
+                            <button type="submit">Editar</button>
+                        {% endif %}
+                    </form>
+                </div>
+                <div>
+                    <form action="{{ url_for('convidados.excluir_page', id=convidado.id) }}" method="post">
+                        {% if session.get("perfil") == "admin" %}
+                            <button type="submit">Excluir</button>
+                        {% endif %}
+                    </form>
+                </div>
+        </div>
+    {% else %}
+        <div>
+            <h1>Nenhum convidado</h1>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

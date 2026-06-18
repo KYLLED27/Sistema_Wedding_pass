@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="top-nav">
+    <a href="{{ url_for('convidados.dashboard_page') }}" class=" btn btn-secondary">Dashboard</a>
+    <a href="{{ url_for('convidados.listar_page')}}" class="btn btn-secondary">Convidados</a>
+    <a href="{{ url_for('auth.me')}}" class="btn btn-secondary">Perfil</a>
+    <a href="{{ url_for('convidados.recepcao_page')}}" class="btn btn-primary active">Recepção</a>
+</div>
+
+<div>
+    {% for convidado in pendentes%}
+        <div>
+            {{ convidado.id }}
+            {{ convidado.nome }}
+            {{ convidado.cpf }}
+            {{ convidado.mesa }}
+            <form action="{{ url_for('convidados.checkin_page', id=convidado.id)}}" method="post">
+                <div>
+                    <button type="submit">Realizar checkin</button>
+                </div>
+            </form>
+        </div>
+    {% else %}
+        <h1>Nenhum convidado</h1>
+    {% endfor %}
+</div>
+{% endblock %}

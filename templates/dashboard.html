@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="top-nav">
+    <a href="{{ url_for('convidados.dashboard_page') }}" class="btn btn-primary active">Dashboard</a>
+    <a href="{{ url_for('convidados.listar_page')}}" class="btn btn-secondary">Convidados</a>
+    <a href="{{ url_for('auth.me')}}" class="btn btn-secondary">Perfil</a>
+    <a href="{{ url_for('convidados.recepcao_page')}}" class="btn btn-secondary">Recepção</a>
+    {% if session.get("perfil") == "admin" %}
+        <a href="{{ url_for('auth.cadastrar_page') }}" class="btn btn-secondary">Cadastrar Usuário</a>
+    {% endif %}
+</div>
+<div>
+    <form action="{{ url_for('auth.logout') }}" method="POST">
+        <button type="submit">Sair</button>
+    </form>
+</div>
+<div>
+    {{ relatorio.total }}
+    {{ relatorio.confirmados }}
+    {{ relatorio.pendentes }}
+</div>
+{% endblock %}

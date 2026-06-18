@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <form action="{{ url_for('convidados.cadastrar_post_page')}}" method="post">
+        <div>
+            <input name="nome" type="text" placeholder="Nome:">
+       </div>
+
+       <div>
+            <input name="cpf" type="number" placeholder="CPF:">
+       </div>
+       
+       <div>
+            <input name="mesa" type="number" placeholder="Mesa:">
+       </div>
+       <div>
+        <button type="submit">Cadastrar</button>
+       </div>
+    </form>
+</div>
+{% endblock %}
