@@ -1,5 +1,7 @@
 # Wedding Pass 💍
 
+(Projeto em desenvolvimento)
+
 Sistema de gestão de convidados para casamentos, desenvolvido em **Python/Flask** com arquitetura em camadas, como projeto de estudo em Full Stack Development.
 
 ## ✨ Funcionalidades
